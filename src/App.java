@@ -6,6 +6,8 @@ public class App extends PApplet{
 
     int paddleA = 100;
     int paddleB = 100;
+    int score = 0;
+
 
     float ballX, ballY;
     float ballXSpeed, ballYSpeed;
@@ -24,8 +26,14 @@ public class App extends PApplet{
 
         ballX = width/2;
         ballY = height/2;
-        ballXSpeed = random(1) > 0.5 ? 4 : -4; // randomly start left OR right
-        ballXSpeed = 4;
+        
+        ballXSpeed = random(1);
+        if (ballXSpeed > 0.5) {
+        ballXSpeed = 3;
+        }else if (ballXSpeed < 0.5) {
+        ballXSpeed = -3;
+        }
+       
         ballYSpeed = 2;
 
     }
@@ -43,28 +51,16 @@ public class App extends PApplet{
         ballYSpeed *= -1;
         }
 
-      
         if (ballX + 20 >= width - 25 && ballY >= paddleA && ballY <= paddleA + 125) {   
-            ballXSpeed *= -0.5;
+            println("touched right");
+            ballXSpeed *= -1;
         }
 
         if (ballX - 20 <= 25 && ballY >= paddleB && ballY <= paddleB + 125) {
-            ballXSpeed *= -0.5;
+            println("touched left");
+            ballXSpeed *= -1;
         }
 
-
-
-        fill(0,0,30); //ball
-        ellipse(ballX, ballY, 40, 40);
-        noStroke();
-        
-        fill(0); //paddleA
-        rect(width - 25, paddleA, 25, 125);
-        noStroke();
-        
-        fill(0); //paddleB
-        rect(width - 400, paddleB, 25, 125);
-        noStroke();
 
         if(up == true) {
             paddleA -= 5;  
@@ -80,15 +76,30 @@ public class App extends PApplet{
 
         if (paddleA < 0) {
         paddleA = 0;
-        }else if (paddleA > height - 125) {  // 150 = paddle height
+        }else if (paddleA > height - 125) {  // 125 = paddle height
         paddleA = height - 125;
 
         }else if (paddleB < 0) {
         paddleB = 0;
-        }else if (paddleB > height - 125) {  // 150 = paddle height
+        }else if (paddleB > height - 125) {  
         paddleB = height - 125;
         }
 
+        fill(0,0,30); //ball
+        ellipse(ballX, ballY, 40, 40);
+        noStroke();
+        
+        fill(0); //paddleA
+        rect(width - 25, paddleA, 25, 125);
+        noStroke();
+        
+        fill(0); //paddleB
+        rect(width - 400, paddleB, 25, 125);
+        noStroke();
+
+        if (ballX == 400) {
+            score += 1;
+        }
     }
 
     public void keyPressed(){
