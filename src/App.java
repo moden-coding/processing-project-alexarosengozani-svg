@@ -6,7 +6,8 @@ public class App extends PApplet{
 
     int paddleA = 100;
     int paddleB = 100;
-    int score = 0;
+    int score1 = 0;
+    int score2 = 0;
 
 
     float ballX, ballY;
@@ -20,6 +21,7 @@ public class App extends PApplet{
     }
 
     public void setup(){
+        textSize(32);
         up = false;
         down = false; 
         leftUp = false;
@@ -35,7 +37,6 @@ public class App extends PApplet{
         }
        
         ballYSpeed = 2;
-
     }
 
     public void settings(){
@@ -97,8 +98,28 @@ public class App extends PApplet{
         rect(width - 400, paddleB, 25, 125);
         noStroke();
 
-        if (ballX == 400) {
-            score += 1;
+        if (ballX >= 400) {
+            score2 += 1;
+            resetGame();
+            System.out.println(score2);
+        }else if (ballX <= 0) {
+            score1 += 1;
+            resetGame();
+            System.out.println(score1);
+        } 
+        if (score1 == 1 || score2 == 1) {
+            background(0);
+            fill(255);
+            text("Game Over",120,100);
+            
+            if (score1 > score2) {
+               text("Player 1 is the winner",80,200);
+            }else if (score2 > score1) {
+               text("Player 2 is the winner",80,200);
+            }
+
+            text("Press space bar to play again",60,300);
+            
         }
     }
 
@@ -128,5 +149,12 @@ public class App extends PApplet{
         }else if (key == 's'){
             leftDown = false;
         }
+    }
+    
+    public void resetGame () {
+        ballX = 200;
+        ballY = 200; 
+        float ballXSpeed, ballYSpeed;
+        
     }
 }
