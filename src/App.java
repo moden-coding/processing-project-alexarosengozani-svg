@@ -9,6 +9,8 @@ public class App extends PApplet{
     int score1 = 0;
     int score2 = 0;
 
+    PImage heart;
+
 
     float ballX, ballY;
     float ballXSpeed, ballYSpeed;
@@ -37,6 +39,8 @@ public class App extends PApplet{
         }
        
         ballYSpeed = 2;
+
+        heart = loadImage("heart.png");
     }
 
     public void settings(){
@@ -97,6 +101,7 @@ public class App extends PApplet{
         fill(0); //paddleB
         rect(width - 400, paddleB, 25, 125);
         noStroke();
+        image(heart, 100,100,100,100);
 
         if (ballX >= 400) {
             score2 += 1;
@@ -106,6 +111,11 @@ public class App extends PApplet{
             score1 += 1;
             resetGame();
             System.out.println(score1);
+        
+            text("Score 1: " + score1, 200,100);
+
+            text("Score 2: " + score2, 100,100 );
+        
         } 
         if (score1 == 1 || score2 == 1) {
             background(0);
