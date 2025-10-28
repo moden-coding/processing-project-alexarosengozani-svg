@@ -9,6 +9,8 @@ public class App extends PApplet{
     int score1 = 0;
     int score2 = 0;
 
+    int scene = 0;
+
     PImage heart;
 
 
@@ -48,6 +50,24 @@ public class App extends PApplet{
     }
 
     public void draw(){
+    scene = 1;
+    if (scene == 1) { //the start page. This is how I start my game, like the home page. 
+        background(200);
+        fill(0);
+        text("Welcome to Pong", 30,30,50,50);
+        fill(0);
+        text("press the f key to start your game",200,200,100,100);
+    }
+
+    if (scene == 2) {
+
+    }
+
+
+
+
+
+    if (scene == 3) {
         background(230);
         ballX += ballXSpeed;
         ballY += ballYSpeed;
@@ -129,8 +149,8 @@ public class App extends PApplet{
             }
 
             text("Press space bar to play again",60,300);
-            
         }
+    }
     }
 
     public void keyPressed(){
