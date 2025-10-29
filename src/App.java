@@ -4,62 +4,72 @@ import processing.core.*;
 
 public class App extends PApplet{
 
-    int paddleA = 100;
-    int paddleB = 100;
-    int score1 = 0;
-    int score2 = 0;
+    int paddleA = 100; //sets paddleA starting hight
+    int paddleB = 100; //sets paddleB starting hight
+    int score1 = 0; //sets player1 score at the beggining 
+    int score2 = 0; //sets player2 score at the beggining 
 
-    int scene = 0;
+    int scene = 0; //sets the the beggining scene that starts everything off
 
-    PImage heart;
-
-
-    float ballX, ballY;
-    float ballXSpeed, ballYSpeed;
+    PImage heart; //inserts the heart image
 
 
-    boolean up, down, leftUp, leftDown;
+    float ballX, ballY; //variable for ball postion
+    float ballXSpeed, ballYSpeed; //variable for ball speed
+
+
+    boolean up, down, leftUp, leftDown; //sets the boolean in order for my paddles to move smoothly
 
     public static void main(String[] args)  {
         PApplet.main("App");
     }
 
     public void setup(){
-        textSize(32);
-        up = false;
+        textSize(32); //sets the size of the text for the whole game
+        up = false;  
         down = false; 
         leftUp = false;
+        leftDown = false;
 
         ballX = width/2;
         ballY = height/2;
         
-        ballXSpeed = random(1);
+        ballXSpeed = random(1); //makes the ball go either left or right randomly 
         if (ballXSpeed > 0.5) {
-        ballXSpeed = 3;
+        ballXSpeed = 3; //makes it go right at the speed of 3 pixels
         }else if (ballXSpeed < 0.5) {
-        ballXSpeed = -3;
+        ballXSpeed = -3; //makes it go left at the speed of 3 pixels
         }
        
-        ballYSpeed = 2;
+        ballYSpeed = 2; //decides how fast the ball goes up at the beggining
 
-        heart = loadImage("heart.png");
+        heart = loadImage("heart.png"); //makes the variable heart store my image 
     }
 
     public void settings(){
-        size(400,400);
+        size(700,500); //sets the window size
     }
 
     public void draw(){
-    scene = 1;
+    scene = 1; //starts the first scene 
     if (scene == 1) { //the start page. This is how I start my game, like the home page. 
-        background(200);
+        background(200); // makes the background grey
+        textSize(60); //sets the size of my text
+        fill(0); //makes my text white
+        text("Welcome to Pong!", 138,200); //puts in my text
+        textSize(33); //sets the size of my text
+        fill(0); // //makes ny text white
+        text("press the the box below to start your game",63,300); //puts in my text
+
+        fill(80,30,200); //gives my box color
+        rect(256,350,180,85); //add in box for continue button
+        textSize(35);
         fill(0);
-        text("Welcome to Pong", 30,30,50,50);
-        fill(0);
-        text("press the f key to start your game",200,200,100,100);
+        text("START GAME",256,400);
+
     }
 
-    if (scene == 2) {
+    if (scene == 2) { //my countdown. makes my game star
 
     }
 
