@@ -12,7 +12,8 @@ public class App extends PApplet{
     int ballG = 0;
     int ballB = 0;
 
-    int scene = 1; //sets the the beggining scene that starts everything off
+    int scene = 2; //sets the the beggining scene that starts everything off
+    int number = 3;
 
     PImage heart; //inserts the heart image
 
@@ -76,12 +77,26 @@ public class App extends PApplet{
     }
 
     if (scene == 2) { //my countdown. makes my game start
+    background(0);
+    textSize(300);
+    text(number, 240,330);
 
+    delay(1000);  //chatgpt
+    number--; //chatgpt
+
+    if (number < 0) {
+    background(0);
+    textSize(300);
+    text("GO!", 85,350);
+     //chatgpt
+
+    delay(1000);
+
+
+    scene = 3;
     }
 
-
-
-
+}
 
     if (scene == 3) {
         background(230);
@@ -174,8 +189,8 @@ public class App extends PApplet{
 
             text("Press space bar to play again",60,300);
         }
-    }
-    }
+    }    
+}
 
     public void keyPressed(){
         if (keyCode == UP) {
