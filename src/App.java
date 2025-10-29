@@ -67,14 +67,15 @@ public class App extends PApplet{
         text("Welcome to Pong!", 116,200); //puts in my text
         textSize(33); //sets the size of my text
         fill(0); // //makes my text white
-        text("press the the box below to view the rules",55,300); //puts in my text
+        text("press the tab button to view the rules",90,300); //puts in my text
+        
     }
 
     if (scene == 2) { //my countdown. makes my game start
     background(230);
-    textSize(100);
-    text("The right paddle is Player1. Player1 use arrow keys.", 100,100);
-    text("The left paddle is Player2. Player2 use wasd.", 200,200);
+    textSize(20);
+    text("The right paddle is Player1. Please use the arrow keys.", 100,100);
+    text("The left paddle is Player2. Pleasr use the wasd keys.", 100,200);
 
     fill(80,30,200); //gives my box color
     rect(230,350,198,80); //add in box for continue button
@@ -155,7 +156,7 @@ public class App extends PApplet{
         }else if (ballX <= 0) {
             score1 += 1;
             resetGame();
-            System.out.println(score1);
+            System.out.println(score1); 
         
             text("Score 1: " + score1, 200,100);
 
@@ -192,6 +193,10 @@ public class App extends PApplet{
             leftDown = true;
         }
 
+        if (key == TAB) {
+            scene = 2;
+        }
+
     }
 
     public void keyReleased () {
@@ -207,10 +212,10 @@ public class App extends PApplet{
     }
 
     public void mousePressed(){
-         if (scene == 1) {
+         if (scene == 2) {
             if (mouseX > 230 && mouseX < 428 && mouseY > 350 && mouseY < 430) {
                 System.out.println("yep");
-                scene = 2;
+                scene = 3;
             }
         }
     }
