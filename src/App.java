@@ -8,8 +8,11 @@ public class App extends PApplet{
     int paddleB = 100; //sets paddleB starting hight
     int score1 = 0; //sets player1 score at the beggining 
     int score2 = 0; //sets player2 score at the beggining 
+    int ballR = 0;
+    int ballG = 0;
+    int ballB = 0;
 
-    int scene = 0; //sets the the beggining scene that starts everything off
+    int scene = 1; //sets the the beggining scene that starts everything off
 
     PImage heart; //inserts the heart image
 
@@ -19,6 +22,11 @@ public class App extends PApplet{
 
 
     boolean up, down, leftUp, leftDown; //sets the boolean in order for my paddles to move smoothly
+
+    float startBoxX = 230;
+    float startBoxY = 350;
+    float startBoxWidth = 198;
+    float startBoxHeight = 80;
 
     public static void main(String[] args)  {
         PApplet.main("App");
@@ -36,9 +44,9 @@ public class App extends PApplet{
         
         ballXSpeed = random(1); //makes the ball go either left or right randomly 
         if (ballXSpeed > 0.5) {
-        ballXSpeed = 3; //makes it go right at the speed of 3 pixels
+        ballXSpeed = 5; //makes it go right at the speed of 3 pixels
         }else if (ballXSpeed < 0.5) {
-        ballXSpeed = -3; //makes it go left at the speed of 3 pixels
+        ballXSpeed = -5; //makes it go left at the speed of 3 pixels
         }
        
         ballYSpeed = 2; //decides how fast the ball goes up at the beggining
@@ -47,29 +55,27 @@ public class App extends PApplet{
     }
 
     public void settings(){
-        size(700,500); //sets the window size
+        size(650,500); //sets the window size
     }
 
-    public void draw(){
-    scene = 1; //starts the first scene 
+    public void draw(){ 
     if (scene == 1) { //the start page. This is how I start my game, like the home page. 
         background(200); // makes the background grey
         textSize(60); //sets the size of my text
         fill(0); //makes my text white
-        text("Welcome to Pong!", 138,200); //puts in my text
+        text("Welcome to Pong!", 116,200); //puts in my text
         textSize(33); //sets the size of my text
-        fill(0); // //makes ny text white
-        text("press the the box below to start your game",63,300); //puts in my text
+        fill(0); // //makes my text white
+        text("press the the box below to start your game",45,300); //puts in my text
 
         fill(80,30,200); //gives my box color
-        rect(256,350,180,85); //add in box for continue button
+        rect(230,350,198,80); //add in box for continue button
         textSize(35);
         fill(0);
-        text("START GAME",256,400);
-
+        text("START GAME",236,400);
     }
 
-    if (scene == 2) { //my countdown. makes my game star
+    if (scene == 2) { //my countdown. makes my game start
 
     }
 
@@ -89,11 +95,19 @@ public class App extends PApplet{
         if (ballX + 20 >= width - 25 && ballY >= paddleA && ballY <= paddleA + 125) {   
             println("touched right");
             ballXSpeed *= -1;
+            
+            ballR = (int)random(255);
+            ballG = (int)random(255);
+            ballB = (int)random(255); 
         }
 
         if (ballX - 20 <= 25 && ballY >= paddleB && ballY <= paddleB + 125) {
             println("touched left");
             ballXSpeed *= -1;
+
+            ballR = (int)random(255);
+            ballG = (int)random(255);
+            ballB = (int)random(255);
         }
 
 
@@ -120,7 +134,7 @@ public class App extends PApplet{
         paddleB = height - 125;
         }
 
-        fill(0,0,30); //ball
+        fill(ballR, ballG, ballB);        
         ellipse(ballX, ballY, 40, 40);
         noStroke();
         
@@ -129,11 +143,11 @@ public class App extends PApplet{
         noStroke();
         
         fill(0); //paddleB
-        rect(width - 400, paddleB, 25, 125);
+        rect(width - 650, paddleB, 25, 125);
         noStroke();
         image(heart, 100,100,100,100);
 
-        if (ballX >= 400) {
+        if (ballX >= 650) {
             score2 += 1;
             resetGame();
             System.out.println(score2);
@@ -190,9 +204,18 @@ public class App extends PApplet{
             leftDown = false;
         }
     }
+
+    public void mousePressed(){
+         if (scene == 1) {
+            if (mouseX > 230 && mouseX < 428 && mouseY > 350 && mouseY < 430) {
+                System.out.println("yep");
+                scene = 3;
+            }
+        }
+    }
     
     public void resetGame () {
-        ballX = 200;
+        ballX = 350;
         ballY = 200; 
         float ballXSpeed, ballYSpeed;
         
