@@ -12,7 +12,7 @@ public class App extends PApplet{
     int ballG = 0;
     int ballB = 0;
 
-    int scene = 3; //sets the the beggining scene that starts everything off
+    int scene = 1; //sets the the beggining scene that starts everything off
 
     PImage heart; //inserts the heart image
 
@@ -44,9 +44,9 @@ public class App extends PApplet{
         
         ballXSpeed = random(1); //makes the ball go either left or right randomly 
         if (ballXSpeed > 0.5) {
-        ballXSpeed = 5; //makes it go right at the speed of 3 pixels
+        ballXSpeed = 4; //makes it go right at the speed of 3 pixels
         }else if (ballXSpeed < 0.5) {
-        ballXSpeed = -5; //makes it go left at the speed of 3 pixels
+        ballXSpeed = -4; //makes it go left at the speed of 3 pixels
         }
        
         ballYSpeed = 2; //decides how fast the ball goes up at the beggining
@@ -70,11 +70,12 @@ public class App extends PApplet{
         
     }
 
-    if (scene == 2) { //my countdown. makes my game start
+    if (scene == 2) { //
     background(230);
     textSize(20);
     text("The right paddle is Player1. Please use the arrow keys.", 100,100);
-    text("The left paddle is Player2. Pleasr use the wasd keys.", 100,200);
+    text("The left paddle is Player2. Please use the wasd keys.", 100,200);
+    text("The game starts quickly. Be Ready!", 180,280);
 
     fill(80,30,200); //gives my box color
     rect(230,350,198,80); //add in box for continue button
@@ -156,26 +157,31 @@ public class App extends PApplet{
             score1 += 1;
             resetGame();
             System.out.println(score1); 
-        
-            text("Score 1: " + score1, 200,100);
-
-            text("Score 2: " + score2, 100,100 );
-        
         } 
-        if (score1 == 1 || score2 == 1) {
-            background(0);
-            fill(255);
-            text("Game Over",250,100);
-            
-            if (score1 > score2) {
-               text("Player 1 is the winner",200,200);
-            }else if (score2 > score1) {
-               text("Player 2 is the winner",200,200);
-            }
-
-            text("Press space bar to play again",155,300);
+        
+        if (score1 == 15 || score2 == 15) {
+            scene = 4;
         }
-    }    
+
+
+        text("Player1 score: " + score1, 350,50);
+
+        text("Player2 score: " + score2, 50,50);
+    }  
+    
+    if (scene == 4) {
+        background(0);
+        fill(255);
+        text("Game Over",250,100);
+            
+        if (score1 > score2) {
+        text("Player 1 is the winner",200,200);
+        }else if (score2 > score1) {
+        text("Player 2 is the winner",200,200);
+        }
+            
+        text("Press space bar to play again",155,300);
+    }
 }
 
     public void keyPressed(){
@@ -191,9 +197,13 @@ public class App extends PApplet{
         else if (key == 's') {
             leftDown = true;
         }
-
         if (key == TAB) {
             scene = 2;
+        }
+        if (scene == 4) {
+            if(key == ' ') {
+            scene = 1;
+            }
         }
 
     }
