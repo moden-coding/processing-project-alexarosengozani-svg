@@ -8,7 +8,8 @@ public class App extends PApplet{
     int paddleB = 100; //sets paddleB starting hight
     int score1 = 0; //sets player1 score at the beggining 
     int score2 = 0; //sets player2 score at the beggining 
-    int ballR = 0;
+    int ballR = 0;//sets the primary colors as a varible so that the color of the ball will be randomized
+
     int ballG = 0;
     int ballB = 0;
 
@@ -44,9 +45,9 @@ public class App extends PApplet{
         
         ballXSpeed = random(1); //makes the ball go either left or right randomly 
         if (ballXSpeed > 0.5) {
-        ballXSpeed = 4; //makes it go right at the speed of 3 pixels
+        ballXSpeed = 6; //makes it go right at the speed of 3 pixels
         }else if (ballXSpeed < 0.5) {
-        ballXSpeed = -4; //makes it go left at the speed of 3 pixels
+        ballXSpeed = -6; //makes it go left at the speed of 3 pixels
         }
        
         ballYSpeed = 2; //decides how fast the ball goes up at the beggining
@@ -67,21 +68,29 @@ public class App extends PApplet{
         textSize(33); //sets the size of my text
         fill(0); // //makes my text white
         text("press the tab button to view the rules",90,300); //puts in my text
+        image(heart, 20,350,100,100);//inserts the heart image at diffrent points
+        image(heart, 120,350,100,100); 
+        image(heart, 230,350,100,100); 
+        image(heart, 330,350,100,100); 
+        image(heart, 440,350,100,100); 
+        image(heart, 550,350,100,100);
+        
+
         
     }
 
     if (scene == 2) { //
     background(230);
     textSize(20);
-    text("The right paddle is Player1. Please use the arrow keys.", 100,100);
-    text("The left paddle is Player2. Please use the wasd keys.", 100,200);
-    text("The game starts quickly. Be Ready!", 180,280);
+    text("The right paddle is Player1. Please use the arrow keys.", 100,100); //expalins the rules
+    text("The left paddle is Player2. Please use the wasd keys.", 100,200); //expalins the rules
+    text("The game starts quickly. Be Ready!", 180,280); //expalins the rules
 
     fill(80,30,200); //gives my box color
     rect(230,350,198,80); //add in box for continue button
-    textSize(35);
-    fill(0);
-    text("START GAME",236,400);
+    textSize(35); //makes the size of the text
+    fill(0); //makes the text black
+    text("START GAME",236,400); //labels the button
     }
 
 
@@ -91,21 +100,21 @@ public class App extends PApplet{
         ballY += ballYSpeed; //makes the ball move up and down
 
         if (ballY <= 0 || ballY >= height) { //when my ball hits the top or bottom, it makes my ball bounce off
-        ballYSpeed *= -1; 
+        ballYSpeed *= -1; //makes it go the opposite direction to bounce off the ceilings
         }
 
-        if (ballX + 20 >= width - 25 && ballY >= paddleA && ballY <= paddleA + 125) { //makes the ball bounce of the right paddle
+        if (ballX + 20 >= width - 25 && ballY >= paddleA && ballY <= paddleA + 110) { //makes the ball bounce of the right paddle
             println("touched right"); //helps me test my game and make sure evrything is runnning well
-            ballXSpeed *= -1;
+            ballXSpeed *= -1; //makes the ball bounce off
             
             ballR = (int)random(255); //makes the ball change color randomly when touching the paddle
             ballG = (int)random(255);
             ballB = (int)random(255); 
         }
 
-        if (ballX - 20 <= 25 && ballY >= paddleB && ballY <= paddleB + 125) { //makes the ball bounce of the left paddle
+        if (ballX - 20 <= 25 && ballY >= paddleB && ballY <= paddleB + 110) { //makes the ball bounce of the left paddle
             println("touched left"); //helps me test my game and make sure evrything is runnning well
-            ballXSpeed *= -1;
+            ballXSpeed *= -1; //makes the ball bounce off
 
             ballR = (int)random(255); //makes the ball change color randomly when touching the paddle
             ballG = (int)random(255);
@@ -127,13 +136,13 @@ public class App extends PApplet{
 
         if (paddleA < 0) {
         paddleA = 0;
-        }else if (paddleA > height - 125) {  // 125 = paddle height
-        paddleA = height - 125;
+        }else if (paddleA > height - 110) {  // 125 = paddle height
+        paddleA = height - 110;
 
         }else if (paddleB < 0) {
         paddleB = 0;
-        }else if (paddleB > height - 125) {  
-        paddleB = height - 125;
+        }else if (paddleB > height - 110) {  
+        paddleB = height - 110;
         }
 
         fill(ballR, ballG, ballB); //makes it so that the ball can change colors     
@@ -141,13 +150,12 @@ public class App extends PApplet{
         noStroke(); //makes there be no border
         
         fill(0); //paddleA
-        rect(width - 25, paddleA, 25, 125); //draws paddleA
+        rect(width - 25, paddleA, 25, 110); //draws paddleA
         noStroke(); //makes there be no border
         
         fill(0); //paddleB
-        rect(width - 650, paddleB, 25, 125); //draws paddleB
+        rect(width - 650, paddleB, 25, 110); //draws paddleB
         noStroke(); //makes there be no border
-        image(heart, 100,100,100,100);
 
         if (ballX >= 650) {
             score2 += 1;
@@ -159,7 +167,7 @@ public class App extends PApplet{
             System.out.println(score1); 
         } 
         
-        if (score1 == 15 || score2 == 15) {
+        if (score1 == 5 || score2 == 5) {
             scene = 4;
         }
 
@@ -202,6 +210,8 @@ public class App extends PApplet{
         }
         if (scene == 4) {
             if(key == ' ') {
+            score1 = 0;
+            score2 = 0;
             scene = 1;
             }
         }
