@@ -12,8 +12,7 @@ public class App extends PApplet{
     int ballG = 0;
     int ballB = 0;
 
-    int scene = 1; //sets the the beggining scene that starts everything off
-    int number = 3;
+    int scene = 3; //sets the the beggining scene that starts everything off
 
     PImage heart; //inserts the heart image
 
@@ -166,15 +165,15 @@ public class App extends PApplet{
         if (score1 == 1 || score2 == 1) {
             background(0);
             fill(255);
-            text("Game Over",120,100);
+            text("Game Over",250,100);
             
             if (score1 > score2) {
-               text("Player 1 is the winner",80,200);
+               text("Player 1 is the winner",200,200);
             }else if (score2 > score1) {
-               text("Player 2 is the winner",80,200);
+               text("Player 2 is the winner",200,200);
             }
 
-            text("Press space bar to play again",60,300);
+            text("Press space bar to play again",155,300);
         }
     }    
 }
