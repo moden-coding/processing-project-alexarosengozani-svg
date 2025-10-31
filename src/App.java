@@ -15,11 +15,14 @@ public class App extends PApplet{
 
     int scene = 1; //sets the the beggining scene that starts everything off
 
+    int Player1Wins = 0;
+    int Player2Wins = 0;
+
     PImage heart; //inserts the heart image
 
 
     float ballX, ballY; //variable for ball postion
-    float ballXSpeed, ballYSpeed; //variable for ball speed
+    double ballXSpeed, ballYSpeed; //variable for ball speed
 
 
     boolean up, down, leftUp, leftDown; //sets the boolean in order for my paddles to move smoothly
@@ -46,7 +49,7 @@ public class App extends PApplet{
         ballXSpeed = random(1); //makes the ball go either left or right randomly 
         if (ballXSpeed > 0.5) {
         ballXSpeed = 6; //makes it go right at the speed of 3 pixels
-        }else if (ballXSpeed < 0.5) {
+        }else if (ballXSpeed < 0.5) { 
         ballXSpeed = -6; //makes it go left at the speed of 3 pixels
         }
        
@@ -106,6 +109,7 @@ public class App extends PApplet{
         if (ballX + 20 >= width - 25 && ballY >= paddleA && ballY <= paddleA + 110) { //makes the ball bounce of the right paddle
             println("touched right"); //helps me test my game and make sure evrything is runnning well
             ballXSpeed *= -1; //makes the ball bounce off
+        
             
             ballR = (int)random(255); //makes the ball change color randomly when touching the paddle
             ballG = (int)random(255);
@@ -119,6 +123,7 @@ public class App extends PApplet{
             ballR = (int)random(255); //makes the ball change color randomly when touching the paddle
             ballG = (int)random(255);
             ballB = (int)random(255);
+
         }
 
 
@@ -157,7 +162,7 @@ public class App extends PApplet{
         rect(width - 650, paddleB, 25, 110); //draws paddleB
         noStroke(); //makes there be no border
 
-        if (ballX >= 650) {
+        if (ballX >= 650) { //when the ball hits the right wall, than add to Player2
             score2 += 1;
             resetGame();
             System.out.println(score2);
@@ -167,19 +172,24 @@ public class App extends PApplet{
             System.out.println(score1); 
         } 
         
-        if (score1 == 5 || score2 == 5) {
-            scene = 4;
-        }
 
-
-        text("Player1 score: " + score1, 350,50);
+        textSize(20);
+        text("Player1 score: " + score1, 470,50);
 
         text("Player2 score: " + score2, 50,50);
+
+        textSize(40);
+        text("Level 1", 260,100);
+
+        if (score1 == 3 || score2 == 3) {
+                scene = 5;
+        }
     }  
     
     if (scene == 4) {
         background(0);
         fill(255);
+        textSize(35);
         text("Game Over",250,100);
             
         if (score1 > score2) {
@@ -189,6 +199,22 @@ public class App extends PApplet{
         }
             
         text("Press space bar to play again",155,300);
+    }
+
+    if (scene == 5) {
+        background(0);
+        textSize(40);
+        if (score1 > score2) {
+            fill(255);
+            text("First level completed", 170,200);
+            text("Player1 has won the first game", 100,300);
+            Player1Wins += 1;
+        }else{
+            fill(255);
+            text("First level completed", 170,200);
+            text("Player2 has won the first game", 100,300);
+            Player2Wins += 1;
+        }
     }
 }
 
@@ -215,7 +241,6 @@ public class App extends PApplet{
             scene = 1;
             }
         }
-
     }
 
     public void keyReleased () {
